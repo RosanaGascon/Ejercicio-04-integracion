@@ -1,16 +1,3 @@
-/*document.addEventListener("DOMContentLoaded", function() {
-    const login = prompt("Ingrese su login:");
-    const password = prompt("Ingrese su password:");
-
-    if (login === "Rosana" && password === "123465") {
-        alert("Bienvenida, administradora");
-    } else {
-        alert("Acceso denegado. Redirigiendo al inicio...");
-        window.location.href = "index.html";
-    }
-});
-*/
-
 document.addEventListener("DOMContentLoaded", function() {
     async function getCredentials() {
         const { value: login } = await Swal.fire({
@@ -23,7 +10,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         if (!login) {
-            Swal.fire('Acceso cancelado', '', 'info');
+            await Swal.fire('Acceso cancelado', '', 'info');
+            window.location.href = "index.html";
             return;
         }
 
@@ -37,11 +25,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         if (!password) {
-            Swal.fire('Acceso cancelado', '', 'info');
+            await Swal.fire('Acceso cancelado', '', 'info');
+            window.location.href = "index.html";
             return;
         }
 
-        if (login === "Rosana" && password === "123465") {
+        if (login === "Rosana" && password === "123456") {
             Swal.fire({
                 title: 'Bienvenida',
                 text: 'Bienvenida, administradora',
@@ -49,14 +38,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 confirmButtonText: 'OK'
             });
         } else {
-            Swal.fire({
+            await Swal.fire({
                 title: 'Acceso Denegado',
                 text: 'Acceso denegado. Redirigiendo al inicio...',
                 icon: 'error',
                 confirmButtonText: 'OK'
-            }).then(() => {
-                window.location.href = "index.html";
             });
+            window.location.href = "index.html";
         }
     }
 
